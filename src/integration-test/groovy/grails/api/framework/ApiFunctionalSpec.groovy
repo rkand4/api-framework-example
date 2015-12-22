@@ -65,6 +65,7 @@ class ApiFunctionalSpec extends Specification {
 
             def personClass = grailsApplication.getDomainClass('net.nosegrind.apiframework.Person').clazz
             def principal = personClass.findByUsername(this.login)
+        println(principal)
             //user = principal.id
             //userRoles = principal.authorities*.authority
         then:

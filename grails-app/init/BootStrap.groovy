@@ -15,7 +15,8 @@ class BootStrap {
     def init = { servletContext ->
 
         grailsApplication.config.apitoolkit.roles.each(){
-            Role role = Role.findByAuthority(it.toString()[0..-2])
+            String currRole = it.toString()[0..-2]
+            Role role = Role.findByAuthority(currRole)
             if(!role){
                 role = new Role(authority:it.toString()[0..-2])
                 role.save(flush:true,failOnError:true)
@@ -27,7 +28,9 @@ class BootStrap {
             Role adminRole = Role.findByAuthority("ROLE_ADMIN")
             if(!user?.id){
                 user = new Person(username:"${grailsApplication.config.root.login}",password:"${grailsApplication.config.root.password}",email:"${grailsApplication.config.root.email}")
-                user.save(flush:true,failOnError:true)
+                if(!user.save(flush:true,failOnError:true)){
+                    user.errors.allErrors.each { log.error it }
+                }
             }else{
                 if(!passwordEncoder.isPasswordValid(user.password, grailsApplication.config.root.password, null)){
                     log.error "Error: Bootstrapped Root Password was changed in config. Please update"
@@ -35,7 +38,8 @@ class BootStrap {
             }
 
             if(!user?.authorities?.contains(adminRole)){
-                PersonRole.create user,adminRole
+                PersonRole pRole = new PersonRole(user,adminRole)
+                pRole.save(flush:true,failOnError:true)
             }
 
             status.isCompleted()

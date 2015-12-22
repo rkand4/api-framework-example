@@ -8,7 +8,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 @ToString(cache=true, includeNames=true, includePackage=false)
 class PersonRole implements Serializable {
 
-	private static final long serialVersionUID = 1
+	// MongoDB
+	//private static final long serialVersionUID = 1
 
 	Person person
 	Role role
@@ -17,23 +18,6 @@ class PersonRole implements Serializable {
 		this()
 		this.person = u
 		this.role = r
-	}
-
-	@Override
-	boolean equals(other) {
-		if (!(other instanceof PersonRole)) {
-			return false
-		}
-
-		other.person?.id == person?.id && other.role?.id == role?.id
-	}
-
-	@Override
-	int hashCode() {
-		def builder = new HashCodeBuilder()
-		if (person) builder.append(person.id)
-		if (role) builder.append(role.id)
-		builder.toHashCode()
 	}
 
 	static PersonRole get(long personId, long roleId) {
@@ -47,12 +31,12 @@ class PersonRole implements Serializable {
 	private static DetachedCriteria criteriaFor(long personId, long roleId) {
 		PersonRole.where {
 			person == Person.load(personId) &&
-			role == Role.load(roleId)
+					role == Role.load(roleId)
 		}
 	}
 
 	static PersonRole create(Person person, Role role, boolean flush = false) {
-		def instance = new PersonRole(person, role)
+		def instance = new PersonRole(person, role, null)
 		instance.save(flush: flush, insert: true)
 		instance
 	}

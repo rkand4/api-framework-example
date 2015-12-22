@@ -1,7 +1,7 @@
 // stormpath tenant: lovely-weaver
 buildscript {
     ext {
-        grailsVersion = '3.0.5.BUILD-SNAPSHOT'
+        grailsVersion = '3.0.10'
         //grailsVersion = project.grailsVersion
     }
     repositories {
@@ -29,7 +29,7 @@ apply plugin: "org.grails.grails-web"
 
 
 ext {
-    grailsVersion = '3.0.5.BUILD-SNAPSHOT'
+    grailsVersion = '3.0.10'
     //grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
 }
@@ -63,7 +63,7 @@ dependencies {
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     runtime 'mysql:mysql-connector-java:5.1.29'
-    compile 'org.grails.plugins:mongodb:4.0.0'
+    //compile 'org.grails.plugins:mongodb:4.0.0'
 
     compile "org.grails.plugins:hibernate"
     compile "org.hibernate:hibernate-ehcache"

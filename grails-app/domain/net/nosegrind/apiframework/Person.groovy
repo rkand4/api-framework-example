@@ -2,7 +2,8 @@ package net.nosegrind.apiframework
 
 class Person implements Serializable {
 
-	private static final long serialVersionUID = 1
+	// MongoDB
+	//private static final long serialVersionUID = 1
 
 	static transients = ['hasBeforeInsert','hasBeforeValidate','hasBeforeUpdate','springSecurityService']
 
@@ -14,30 +15,10 @@ class Person implements Serializable {
 	String username
 	String password
 	boolean enabled = true
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+	boolean accountExpired = false
+	boolean accountLocked = false
+	boolean passwordExpired = false
 
-	Person(String username, String password) {
-		this()
-		this.username = username
-		this.password = password
-	}
-
-	@Override
-	int hashCode() {
-		username?.hashCode() ?: 0
-	}
-
-	@Override
-	boolean equals(other) {
-		is(other) || (other instanceof Person && other.username == username)
-	}
-
-	@Override
-	String toString() {
-		username
-	}
 
 	Set<Role> getAuthorities() {
 		PersonRole.findAllByPerson(this)*.role
@@ -83,6 +64,6 @@ class Person implements Serializable {
 
 	static mapping = {
 		datasource 'user'
-		password column: '`password`'
+		//password column: '`password`'
 	}
 }
