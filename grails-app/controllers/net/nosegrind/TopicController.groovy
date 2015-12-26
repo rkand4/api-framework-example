@@ -17,11 +17,9 @@ class TopicController {
 	}
 	
 	def show(){
-println("topic/show")
+
 		def topic = Topic.get(params.id.toLong())
-println(params.id)
 		if(topic){
-println(topic)
 	    		return ['topic':topic]
 		}
 	}
@@ -31,7 +29,6 @@ println(topic)
 		
 		if (!topicInstance.save(flush:true)) {
 			topicInstance.errors.allErrors.each {
-				println it
 			}
 			//render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save topic')
 		}else{

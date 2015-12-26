@@ -1,6 +1,7 @@
 package net.nosegrind.apiframework
 
-class Role {
+
+class Rolee{
 
 	// MongoDB
 	//private static final long serialVersionUID = 1

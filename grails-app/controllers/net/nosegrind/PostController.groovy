@@ -103,7 +103,6 @@ class PostController {
 	}
 	
 	def update(){
-		println("update called")
 		Post postInstance = Post.get(params.id.toLong())
 		Person person = springSecurityService.currentUser
 		List roles = springSecurityService.getPrincipal().getAuthorities() as List

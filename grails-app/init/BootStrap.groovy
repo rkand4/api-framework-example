@@ -13,7 +13,7 @@ class BootStrap {
 	//ApiCacheService apiCacheService
 	
     def init = { servletContext ->
-
+/*
         grailsApplication.config.apitoolkit.roles.each(){
             String currRole = it.toString()[0..-2]
             Role role = Role.findByAuthority(currRole)
@@ -44,7 +44,7 @@ class BootStrap {
 
             status.isCompleted()
         }
-
+*/
 
 		/*
 		def plugins = pluginMngr.getAllPlugins()

@@ -14,8 +14,7 @@ String domainEntryPoint = "d${apiVersion}"
 
 grails.plugin.springsecurity.adh.errorPage = null
 
-
-//grails.plugin.springsecurity.providerNames = ['daoAuthenticationProvider', 'anonymousAuthenticationProvider', 'rememberMeAuthenticationProvider']
+grails.plugin.springsecurity.providerNames = ['daoAuthenticationProvider', 'anonymousAuthenticationProvider', 'rememberMeAuthenticationProvider']
 
 // move to RequestMap once stabilized
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
@@ -30,15 +29,34 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 */
 
-
 /*        "/${batchEntryPoint}/**" : 'none',
         "/${chainEntryPoint}/**" : 'none',
         "/${tracertEntryPoint}/**" : 'none',
         "/${domainEntryPoint}/**" : 'none'
 */
+
+
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'net.nosegrind.apiframework.Person'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'net.nosegrind.apiframework.PersonRole'
+grails.plugin.springsecurity.authority.className = 'net.nosegrind.apiframework.Role'
+
+
+grails.plugin.springsecurity.rememberMe.alwaysRemember = true
+grails.plugin.springsecurity.rememberMe.cookieName = 'apiTest'
+grails.plugin.springsecurity.rememberMe.key = '_grails_'
+
+grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.ui.encodePassword = false
+grails.plugin.springsecurity.auth.forceHttps = false
+grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth/'
+grails.plugin.springsecurity.auth.ajaxLoginFormUrl = '/login/authAjax/'
+
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/'
+grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/'
+
 grails.plugin.springsecurity.interceptUrlMap = [
         "/${entryPoint}/**":'permitAll',
-        '/**':              'IS_AUTHENTICATED_FULLY',
+        '/**':              'permitAll',
         '/':                'permitAll',
         '/error':           'permitAll',
         '/index':           'permitAll',

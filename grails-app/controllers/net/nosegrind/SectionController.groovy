@@ -23,19 +23,14 @@ class SectionController {
 	}
 	
 	def create(){
-        println("section/create called...")
-        println(params)
 		Section sectionInstance = new Section()
 		sectionInstance.sectionName = params.sectionName
 		sectionInstance.sectionName = (!params?.commentsAllowed?.empty)?params.sectionName:true
 
 		if (!sectionInstance.save(flush:true)) {
-            println("could not flush")
-			sectionInstance.errors.allErrors.each { println it }
-            //render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save section')
+            render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save section')
 		}else{
 			Section section = Section.get(sectionInstance.id)
-
             return ['section':section]
 		}
 	}
@@ -57,8 +52,7 @@ class SectionController {
 		}
 
 		if (sectionInstance.hasErrors()) {
-			sectionInstance.errors.allErrors.each { println it }
-			//render(status:HttpServletResponse.SC_NOT_FOUND)
+			render(status:HttpServletResponse.SC_NOT_FOUND)
 		}
 
 		if(!sectionInstance.save(flush:true)){

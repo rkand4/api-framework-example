@@ -1,7 +1,7 @@
 // stormpath tenant: lovely-weaver
 buildscript {
     ext {
-        grailsVersion = '3.0.10'
+        grailsVersion = '3.1.0.RC1'
         //grailsVersion = project.grailsVersion
     }
     repositories {
@@ -29,7 +29,7 @@ apply plugin: "org.grails.grails-web"
 
 
 ext {
-    grailsVersion = '3.0.10'
+    grailsVersion = '3.1.0.RC1'
     //grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
 }
@@ -46,7 +46,7 @@ dependencyManagement {
     applyMavenExclusions false
 }
 
-run {
+bootRun {
     systemProperties = System.properties
 }
 
@@ -59,11 +59,18 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-logging"
     //compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    //compile "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-dependencies"
-    compile "org.grails:grails-web-boot"
+    //compile "org.grails:grails-web-boot"
     runtime 'mysql:mysql-connector-java:5.1.29'
     //compile 'org.grails.plugins:mongodb:4.0.0'
+
+    provided 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    compile 'org.grails.plugins:spring-security-core:3.0.0.M1'
+    // 3.1.0RC1
+    compile 'org.springframework.security:spring-security-core:3.2.9.RELEASE'
+    compile 'org.springframework.security:spring-security-web:3.2.9.RELEASE'
 
     compile "org.grails.plugins:hibernate"
     compile "org.hibernate:hibernate-ehcache"
@@ -79,6 +86,7 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
+
 
 
 

@@ -23,7 +23,7 @@ class Hook {
 		name(nullable:false,maxSize:200)
 		url(nullable:false)
 		format(nullable:false)
-		service()
-		attempts()
+		service(nullable:false)
+		attempts(nullable:false)
 	}
 }
