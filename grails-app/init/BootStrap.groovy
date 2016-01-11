@@ -3,7 +3,9 @@ import net.nosegrind.apiframework.ApiObjectService;
 
 //import grails.plugins.GrailsPluginManager
 //import grails.plugins.GrailsPlugin
-import net.nosegrind.apiframework.*
+import net.nosegrind.apiframework.Person
+import net.nosegrind.*
+import java.util.Date;
 
 class BootStrap {
 
@@ -22,8 +24,38 @@ class BootStrap {
                 role.save(flush:true,failOnError:true)
             }
         }
-
+*/
         Person user = Person.findByUsername("${grailsApplication.config.root.login}")
+
+        /*
+        new Section(sectionName:"News").save(flush:true,failOnError:true)
+        new Section(sectionName:"General").save(flush:true,failOnError:true)
+        new Section(sectionName:"Update").save(flush:true,failOnError:true)
+        new Section(sectionName:"Development").save(flush:true,failOnError:true)
+
+        new Topic(topicName:"Android").save(flush:true,failOnError:true)
+        new Topic(topicName:"Spring").save(flush:true,failOnError:true)
+        new Topic(topicName:"Grails").save(flush:true,failOnError:true)
+        new Topic(topicName:"Groovy").save(flush:true,failOnError:true)
+*/
+
+        Post post = new Post();
+
+        post.title = 'Test Post'
+        post.teaser = "This is just a test post to see if this works. Testing the api post system."
+        post.content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel consequat nisl, quis commodo neque. Integer ultrices vitae nulla lacinia rutrum. Duis ut porta arcu, sed gravida tortor. Donec pulvinar elit turpis, ultricies tristique mi auctor ac. Ut elementum ullamcorper risus ac sollicitudin. Morbi semper ultrices enim vel euismod. Proin eleifend orci ac elit mollis tempor. Nulla egestas odio eu volutpat eleifend. Nunc nec massa eget nisl sodales posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc accumsan pretium sapien a tincidunt. Sed at fringilla mi."
+        post.section = Section.get(1)
+
+        Date now = new Date();
+        post.creationDate = now;
+        post.modifiedDate = now;
+        post.endCommentsDate = null
+
+        post.author = user.id
+
+        post.save(flush:true)
+
+        /*
         PersonRole.withTransaction(){ status ->
             Role adminRole = Role.findByAuthority("ROLE_ADMIN")
             if(!user?.id){

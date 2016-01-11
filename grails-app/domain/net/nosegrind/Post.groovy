@@ -2,16 +2,19 @@ package net.nosegrind
 
 import java.io.Serializable;
 import java.util.Date;
-//import org.bson.types.ObjectId
+import org.springframework.transaction.annotation.Transactional
+import org.bson.types.ObjectId
 //import groovy.sql.Sql
+import groovy.transform.ToString
 
 //@Typed(TypePolicy.MIXED)
+//@Transactional
+//@ToString(includeNames = true, includeFields = true)
 class Post implements Serializable{
 
-	//static mapWith = "mongo"
+	static mapWith = "mongo"
 	static hasMany = [topics:PostTopic]
 
-	//ObjectId id
 	String title
 	String teaser
 	String content
@@ -34,5 +37,8 @@ class Post implements Serializable{
 		currentCnt(nullable:false,blank:false)
 	}
 
+	static mapping = {
+		cache true
+	}
 }
 

@@ -1,16 +1,14 @@
 package net.nosegrind
 
-//import org.bson.types.ObjectId
+import groovy.transform.ToString
+import org.bson.types.ObjectId
 
-//@Typed(TypePolicy.MIXED)
+//@ToString(includeNames = true, includeFields = true)
 class Status {
 
-	//static mapWith = "mongo"
+	static mapWith = "mongo"
 	static hasMany = [posts: Post ]
 
-
-
-	//ObjectId id
 	String statName
 	
     static constraints = {

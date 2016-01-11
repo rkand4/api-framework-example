@@ -4,7 +4,9 @@ import net.nosegrind.apiframework.Person
 
 import static grails.async.Promises.*
 import javax.servlet.http.HttpServletResponse
+//import grails.transaction.Transactional
 
+//@Transactional
 class PostController {
                              
 	static defaultAction = 'list'

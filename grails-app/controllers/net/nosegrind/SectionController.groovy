@@ -23,12 +23,16 @@ class SectionController {
 	}
 	
 	def create(){
+		println("***** [section/create] *****")
+		println(params)
 		Section sectionInstance = new Section()
 		sectionInstance.sectionName = params.sectionName
 		sectionInstance.sectionName = (!params?.commentsAllowed?.empty)?params.sectionName:true
 
 		if (!sectionInstance.save(flush:true)) {
-            render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save section')
+			sectionInstance.errors.allErrors.each { println it }
+			response.status = 400
+			response.setHeader('ERROR','Could not save Section. Please check your data and try again.')
 		}else{
 			Section section = Section.get(sectionInstance.id)
             return ['section':section]

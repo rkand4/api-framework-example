@@ -41,6 +41,17 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'net.nosegrind.
 grails.plugin.springsecurity.authority.className = 'net.nosegrind.apiframework.Role'
 
 
+// grails.plugin.springsecurity.rememberMe.persistent = true		  // grails.plugin.springsecurity.rememberMe.persistent = true
+// grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apiframework.PersistentLogin'		  // grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apiframework.PersistentLogin'
+
+
+grails.plugin.springsecurity.adh.errorPage = null
+grails.plugin.springsecurity.adh.errorPage = null
+
+
+grails.plugin.springsecurity.providerNames = ['daoAuthenticationProvider', 'anonymousAuthenticationProvider', 'rememberMeAuthenticationProvider']
+
+
 grails.plugin.springsecurity.rememberMe.alwaysRemember = true
 grails.plugin.springsecurity.rememberMe.cookieName = 'apiTest'
 grails.plugin.springsecurity.rememberMe.key = '_grails_'

@@ -6,7 +6,7 @@ grails:
 info:
     app:
         name: '@info.app.name@'
-        version: '@info.app.version@'
+        version: 0.1
         grailsVersion: '@info.app.grailsVersion@'
 spring:
     groovy:
@@ -55,9 +55,11 @@ grails:
         encoding: UTF-8
     hibernate:
         cache:
-            queries: false
-            use_second_level_cache: false
-            use_query_cache: false
+            use_second_level_cache: true
+            use_query_cache: true
+            provider_class: 'org.hibernate.cache.EhCacheProvider'
+            region:
+                factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
     views:
         default:
             codec: html
@@ -71,10 +73,12 @@ grails:
                 staticparts: none
     tomcat:
         jvmArgs:
+
             -'-Xms1024m'
-            -'-Xmx2048m'
+            -'-Xmx1024m'
             -'-XX:PermSize=1024m'
             -'-XX:MaxPermSize=2048m'
+            -'-XX:MaxNewSize=256m'
             -'-XX:+CMSClassUnloadingEnabled'
             -'-XX:+UseConcMarkSweepGC'
             -'-XX:+CMSIncrementalMode'
@@ -83,6 +87,9 @@ grails:
             -'-XX:+UseParNewGC'
             -'-XX:MaxGCPauseMillis=250'
             -'-XX:MaxGCMinorPauseMillis=100'
+            -'-XX:SurvivorRatio=128'
+            -'-XX:MaxTenuringThreshold=0'
+            -'-XX:+UseTLAB'
             -'-server'
 
 environments:
@@ -93,128 +100,53 @@ environments:
     production:
         server:
             context-path: ''
-            port: 80
+            port: 8080
 
 ---
-hibernate:
-    cache:
-        use_second_level_cache: true
-        use_query_cache: false
-        provider_class: 'org.hibernate.cache.EhCacheProvider'
-        region:
-            factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
-
-dataSources:
-    dataSource:
-        pooled: true
-        jmxExport: true
-        driverClassName: com.mysql.jdbc.Driver
-        username: root
-        password: Ch335eB0y
-    user:
-        pooled: true
-        jmxExport: true
-        driverClassName: com.mysql.jdbc.Driver
-        username: root
-        password: Ch335eB0y
-
 environments:
     development:
-        dataSources:
-            dataSource:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testdb
-                properties:
-                    jmxEnabled: true
-                    initialSize: 5
-                    maxActive: 50
-                    minIdle: 5
-                    maxIdle: 25
-                    maxWait: 10000
-                    maxAge: 600000
-                    timeBetweenEvictionRunsMillis: 5000
-                    minEvictableIdleTimeMillis: 60000
-                    validationQuery: SELECT 1
-                    validationQueryTimeout: 3
-                    validationInterval: 15000
-                    testOnBorrow: true
-                    testWhileIdle: true
-                    testOnReturn: false
-                    jdbcInterceptors: ConnectionState
-                    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-            user:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testuser
-                properties:
-                    jmxEnabled: true
-                    initialSize: 5
-                    maxActive: 50
-                    minIdle: 5
-                    maxIdle: 25
-                    maxWait: 10000
-                    maxAge: 600000
-                    timeBetweenEvictionRunsMillis: 5000
-                    minEvictableIdleTimeMillis: 60000
-                    validationQuery: SELECT 1
-                    validationQueryTimeout: 3
-                    validationInterval: 15000
-                    testOnBorrow: true
-                    testWhileIdle: true
-                    testOnReturn: false
-                    jdbcInterceptors: ConnectionState
-                    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+        grails:
+            mongodb:
+                connectionString: "mongodb://127.0.0.1:27017/testdb"
+                autoConnectRetry: true
+                connectTimeout: 0
+                maxWaitTime: 120000
+                socketTimeout: 0
+                socketKeepAlive: false
+                writeNumer: 0
+                writeTimeout: 0
+                writeFsync: false
+        dataSource:
+            dbCreate: create-drop
     test:
-        dataSources:
-            dataSource:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testdb
-            user:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testuser
+        grails:
+            mongodb:
+                connectionString: "mongodb://127.0.0.1:27017/testdb"
+                autoConnectRetry: true
+                connectTimeout: 0
+                maxWaitTime: 120000
+                socketTimeout: 0
+                socketKeepAlive: false
+                writeNumer: 0
+                writeTimeout: 0
+                writeFsync: false
+        dataSource:
+            dbCreate: create-drop
     production:
-        dataSources:
-            dataSource:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testdb
-                properties:
-                    jmxEnabled: true
-                    initialSize: 5
-                    maxActive: 50
-                    minIdle: 5
-                    maxIdle: 25
-                    maxWait: 10000
-                    maxAge: 600000
-                    timeBetweenEvictionRunsMillis: 5000
-                    minEvictableIdleTimeMillis: 60000
-                    validationQuery: SELECT 1
-                    validationQueryTimeout: 3
-                    validationInterval: 15000
-                    testOnBorrow: true
-                    testWhileIdle: true
-                    testOnReturn: false
-                    jdbcInterceptors: ConnectionState
-                    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
-            user:
-                dbCreate: update
-                url: jdbc:mysql://localhost:3306/testuser
-                properties:
-                    jmxEnabled: true
-                    initialSize: 5
-                    maxActive: 50
-                    minIdle: 5
-                    maxIdle: 25
-                    maxWait: 10000
-                    maxAge: 600000
-                    timeBetweenEvictionRunsMillis: 5000
-                    minEvictableIdleTimeMillis: 60000
-                    validationQuery: SELECT 1
-                    validationQueryTimeout: 3
-                    validationInterval: 15000
-                    testOnBorrow: true
-                    testWhileIdle: true
-                    testOnReturn: false
-                    jdbcInterceptors: ConnectionState
-                    defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+        grails:
+            mongodb:
+                connectionString: "mongodb://127.0.0.1:27017/testdb"
+                autoConnectRetry: true
+                connectTimeout: 0
+                maxWaitTime: 120000
+                socketTimeout: 0
+                socketKeepAlive: false
+                writeNumer: 0
+                writeTimeout: 0
+                writeFsync: false
+        dataSource:
+            dbCreate: create-drop
+
 ---
 apitoolkit:
     apiName: api
@@ -228,6 +160,7 @@ apitoolkit:
         enabled: true
     batching:
         enabled: true
+    encoding: UTF-8
     user:
         roles: {ROLE_USER}
     admin:

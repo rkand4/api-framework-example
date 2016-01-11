@@ -1,9 +1,14 @@
 package net.nosegrind.apiframework
 
 import java.util.Date
+import groovy.transform.ToString
+import org.bson.types.ObjectId
 
+@ToString(includeNames = true, includeFields = true)
 class Hook {
-	
+
+	static mapWith = "mongo"
+
 	Person user
 	String name
 	String url
@@ -15,7 +20,7 @@ class Hook {
 	Date lastModified = new Date()
 
 	static mapping = {
-		datasource 'user'
+		//datasource 'user'
 	}
 	
 	static constraints = {

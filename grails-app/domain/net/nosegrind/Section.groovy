@@ -1,15 +1,15 @@
 package net.nosegrind
 
 import java.io.Serializable;
-//import org.bson.types.ObjectId
+import groovy.transform.ToString
+import org.bson.types.ObjectId
 
-//@Typed(TypePolicy.MIXED)
+//@ToString(includeNames = true, includeFields = true)
 class Section implements Serializable{
 
-	//static mapWith = "mongo"
+	static mapWith = "mongo"
 	static hasMany = [ posts : Post ]
 
-	//ObjectId id
 	String sectionName
 	Boolean commentsAllowed = true
 	

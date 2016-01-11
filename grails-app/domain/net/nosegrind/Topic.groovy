@@ -1,14 +1,15 @@
 package net.nosegrind
 
 import java.io.Serializable;
-//import org.bson.types.ObjectId
+import groovy.transform.ToString
+import org.bson.types.ObjectId
 
+//@ToString(includeNames = true, includeFields = true)
 class Topic implements Serializable{
 
-	//static mapWith = "mongo"
+	static mapWith = "mongo"
 	static hasMany = [ posts : PostTopic ]
 
-	//ObjectId id
 	String topicName
 	
     static constraints = {
