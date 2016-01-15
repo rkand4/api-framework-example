@@ -73,12 +73,10 @@ grails:
                 staticparts: none
     tomcat:
         jvmArgs:
-
             -'-Xms1024m'
-            -'-Xmx1024m'
+            -'-Xmx2048m'
             -'-XX:PermSize=1024m'
             -'-XX:MaxPermSize=2048m'
-            -'-XX:MaxNewSize=256m'
             -'-XX:+CMSClassUnloadingEnabled'
             -'-XX:+UseConcMarkSweepGC'
             -'-XX:+CMSIncrementalMode'
@@ -87,9 +85,6 @@ grails:
             -'-XX:+UseParNewGC'
             -'-XX:MaxGCPauseMillis=250'
             -'-XX:MaxGCMinorPauseMillis=100'
-            -'-XX:SurvivorRatio=128'
-            -'-XX:MaxTenuringThreshold=0'
-            -'-XX:+UseTLAB'
             -'-server'
 
 environments:

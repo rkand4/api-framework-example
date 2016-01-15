@@ -5,7 +5,7 @@ String apiVersion = Metadata.current.getApplicationVersion()
 String entryPoint = "/v${apiVersion}".toString()
 String batchEntryPoint = "b${apiVersion}"
 String chainEntryPoint = "c${apiVersion}"
-String tracertEntryPoint = "t${apiVersion}"
+String metricsEntryPoint = "m${apiVersion}"
 String domainEntryPoint = "d${apiVersion}"
 
 // Added by the Spring Security Core plugin:
@@ -31,7 +31,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 /*        "/${batchEntryPoint}/**" : 'none',
         "/${chainEntryPoint}/**" : 'none',
-        "/${tracertEntryPoint}/**" : 'none',
+        "/${metricsEntryPoint}/**" : 'none',
         "/${domainEntryPoint}/**" : 'none'
 */
 
