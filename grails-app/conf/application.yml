@@ -75,16 +75,17 @@ grails:
         jvmArgs:
             -'-Xms1024m'
             -'-Xmx2048m'
-            -'-XX:PermSize=1024m'
-            -'-XX:MaxPermSize=2048m'
+            -'-XX:MaxNewSize=384m'
+            -'-XX:MaxPermSize=128m'
+            -'-XX:ParallelGCThreads=2'
             -'-XX:+CMSClassUnloadingEnabled'
             -'-XX:+UseConcMarkSweepGC'
             -'-XX:+CMSIncrementalMode'
             -'-XX:+CMSIncrementalPacing'
             -'-XX:CMSIncrementalDutyCycle=10'
             -'-XX:+UseParNewGC'
-            -'-XX:MaxGCPauseMillis=250'
-            -'-XX:MaxGCMinorPauseMillis=100'
+            -'-XX:MaxGCPauseMillis=50'
+            -'-XX:MaxGCMinorPauseMillis=50'
             -'-server'
 
 environments:
