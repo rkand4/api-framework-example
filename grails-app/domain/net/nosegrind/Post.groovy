@@ -9,7 +9,7 @@ import groovy.transform.ToString
 
 //@Typed(TypePolicy.MIXED)
 //@Transactional
-//@ToString(includeNames = true, includeFields = true)
+@ToString(includeNames = true, includeFields = true)
 class Post implements Serializable{
 
 	static mapWith = "mongo"

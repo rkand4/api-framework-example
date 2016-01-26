@@ -17,4 +17,8 @@ class Section implements Serializable{
 		sectionName(size:2..65, nullable:false, blank:false,unique:true)
 		commentsAllowed(nullable:false, blank:false)
     }
+
+	static mapping = {
+		cache true
+	}
 }

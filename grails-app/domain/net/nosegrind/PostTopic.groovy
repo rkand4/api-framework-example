@@ -16,4 +16,8 @@ class PostTopic implements Serializable{
 		post(nullable:false, blank:false)
 		topic(nullable:false, blank:false)
     }
+
+	static mapping = {
+		cache true
+	}
 }
