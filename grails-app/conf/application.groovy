@@ -61,6 +61,7 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/ajaxSucce
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/ajaxDenied'
 grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied'
 
+
 grails.plugin.springsecurity.interceptUrlMap = [
         "/${entryPoint}/**":['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**':              ['IS_AUTHENTICATED_ANONYMOUSLY'],
@@ -68,7 +69,6 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/error':           ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/index':           ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/index.gsp':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/shutdown':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/assets/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/error/**' :       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/apidoc/**' :      ['IS_AUTHENTICATED_ANONYMOUSLY'],
