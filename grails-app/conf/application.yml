@@ -162,8 +162,14 @@ apitoolkit:
     admin:
         roles: {ROLE_ROOT,ROLE_ADMIN,ROLE_ARCH}
     serverType: master
+    webhook:
+        services: {iostate}
     iostate:
         preloadDir: /home/owenrubel/.iostate
+corsInterceptor:
+    includeEnvironments: {development,test}
+    excludeEnvironments: {production}
+    allowedOrigins: {"localhost:3000"}
 
 ---
 server:

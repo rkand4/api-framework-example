@@ -54,8 +54,8 @@ grails.plugin.springsecurity.rememberMe.key = '_grails_'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.ui.encodePassword = false
 grails.plugin.springsecurity.auth.forceHttps = false
-//grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth/'
-//grails.plugin.springsecurity.auth.ajaxLoginFormUrl = '/login/authAjax/'
+grails.plugin.springsecurity.auth.loginFormUrl = '/login/auth/'
+grails.plugin.springsecurity.auth.ajaxLoginFormUrl = '/login/authAjax/'
 
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/ajaxSuccess'
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/ajaxDenied'
