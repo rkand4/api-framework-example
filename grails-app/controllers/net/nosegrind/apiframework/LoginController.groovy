@@ -120,7 +120,7 @@ class LoginController {
 
 	/** The Ajax success redirect url. */
 	def ajaxSuccess() {
-		render([success: true, username: authentication.name] as JSON)
+		return [success: true, username: authentication.name] as JSON
 	}
 
 	/** The Ajax denied redirect url. */

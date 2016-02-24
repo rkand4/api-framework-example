@@ -166,10 +166,13 @@ apitoolkit:
         services: {iostate}
     iostate:
         preloadDir: /home/owenrubel/.iostate
-corsInterceptor:
-    includeEnvironments: {development,test}
-    excludeEnvironments: {production}
-    allowedOrigins: {"localhost:3000"}
+        archInstanceUrls:
+            "proxy": "127.0.0.1"
+            "mq": "127.0.0.1"
+    corsInterceptor:
+        includeEnvironments: {development,test}
+        excludeEnvironments: {production}
+        allowedOrigins: "localhost:3000"}
 
 ---
 server:
