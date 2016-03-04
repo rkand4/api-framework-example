@@ -63,25 +63,25 @@ grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied
 
 
 grails.plugin.springsecurity.interceptUrlMap = [
-        "/${entryPoint}/**":['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**':              ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/':                ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/error':           ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/index':           ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/index.gsp':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/assets/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/error/**' :       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/apidoc/**' :      ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**/images/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/**/favicon.ico':  ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/auth':            ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/auth/**':         ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/login':           ["permitAll"],
-        '/login/**':        ["permitAll"],
-        '/logout':          ["permitAll"],
-        '/logout/**':       ["permitAll"]
+        [pattern:"/${entryPoint}/**",   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/**',                 access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/',                   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/error',              access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/index',              access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/index.gsp',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/assets/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/error/**',           access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/apidoc/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/**/js/**',           access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/**/css/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/**/images/**',       access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/**/favicon.ico',     access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/auth',               access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/auth/**',            access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:'/login',              access:["permitAll"]],
+        [pattern:'/login/**',           access:["permitAll"]],
+        [pattern:'/logout',             access:["permitAll"]],
+        [pattern:'/logout/**',          access:["permitAll"]]
 ]
 
 

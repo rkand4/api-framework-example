@@ -4,7 +4,7 @@ import java.util.Date
 import groovy.transform.ToString
 import org.bson.types.ObjectId
 
-@ToString(includeNames = true, includeFields = true)
+//@ToString(includeNames = true, includeFields = true)
 class Hook {
 
 	static mapWith = "mongo"

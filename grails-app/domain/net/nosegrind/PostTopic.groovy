@@ -3,11 +3,12 @@ package net.nosegrind
 import groovy.transform.ToString
 import org.bson.types.ObjectId
 
-//@ToString(includeNames = true, includeFields = true)
+@ToString(includeNames = true, includeFields = true)
 class PostTopic implements Serializable{
 
 	static mapWith = "mongo"
 	static belongsTo = [Post,Topic]
+
 
 	Post post
 	Topic topic

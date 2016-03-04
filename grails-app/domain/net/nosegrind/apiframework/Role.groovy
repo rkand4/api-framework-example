@@ -10,8 +10,8 @@ class Role{
 	static mapWith = "mongo"
 
 	// MongoDB
-	//private static final long serialVersionUID = 1
-	//ObjectId id
+	//private static final long serialVersionUID = 1'
+
 	String authority
 
 	static constraints = {

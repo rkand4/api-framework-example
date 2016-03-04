@@ -4,10 +4,11 @@ import java.util.Date
 import groovy.transform.ToString
 import org.bson.types.ObjectId
 
-@ToString(includeNames = true, includeFields = true)
+//@ToString(includeNames = true, includeFields = true)
 class HookRole {
 
 	static mapWith = "mongo"
+
 
 	Hook hook
 	Role role

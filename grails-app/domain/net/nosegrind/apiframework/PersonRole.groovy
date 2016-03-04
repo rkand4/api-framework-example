@@ -14,7 +14,7 @@ class PersonRole implements Serializable {
 
 	// MongoDB
 	//private static final long serialVersionUID = 1
-	//ObjectId id
+
 	Person person
 	Role role
 

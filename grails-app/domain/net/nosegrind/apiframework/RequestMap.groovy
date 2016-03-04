@@ -15,7 +15,6 @@ class RequestMap implements Serializable {
     // MongoDB
     //private static final long serialVersionUID = 1
 
-    //ObjectId id
     String configAttribute
     HttpMethod httpMethod
     String url

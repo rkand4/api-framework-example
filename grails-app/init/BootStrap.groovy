@@ -4,6 +4,9 @@ import net.nosegrind.apiframework.ApiObjectService;
 //import grails.plugins.GrailsPluginManager
 //import grails.plugins.GrailsPlugin
 import net.nosegrind.apiframework.Person
+import net.nosegrind.apiframework.Role
+import net.nosegrind.apiframework.PersonRole
+
 import net.nosegrind.*
 import java.util.Date;
 
@@ -17,17 +20,38 @@ class BootStrap {
     def init = { servletContext ->
 /*
         grailsApplication.config.apitoolkit.roles.each(){
-            String currRole = it.toString()[0..-2]
+            String currRole = it.toString()[0..-6]
             Role role = Role.findByAuthority(currRole)
             if(!role){
-                role = new Role(authority:it.toString()[0..-2])
+                println(currRole)
+                role = new Role(authority:currRole)
                 role.save(flush:true,failOnError:true)
             }
         }
 */
         Person user = Person.findByUsername("${grailsApplication.config.root.login}")
-
         /*
+        PersonRole.withTransaction(){ status ->
+            Role adminRole = Role.findByAuthority("ROLE_ADMIN")
+            if(!user?.id){
+                user = new Person(username:"${grailsApplication.config.root.login}",password:"${grailsApplication.config.root.password}",email:"${grailsApplication.config.root.email}")
+                if(!user.save(flush:true,failOnError:true)){
+                    user.errors.allErrors.each { log.error it }
+                }
+            }else{
+                if(!passwordEncoder.isPasswordValid(user.password, grailsApplication.config.root.password, null)){
+                    log.error "Error: Bootstrapped Root Password was changed in config. Please update"
+                }
+            }
+
+            if(!user?.authorities?.contains(adminRole)){
+                PersonRole pRole = new PersonRole(user,adminRole)
+                pRole.save(flush:true,failOnError:true)
+            }
+
+            status.isCompleted()
+        }
+
         new Section(sectionName:"News").save(flush:true,failOnError:true)
         new Section(sectionName:"General").save(flush:true,failOnError:true)
         new Section(sectionName:"Update").save(flush:true,failOnError:true)
@@ -55,28 +79,9 @@ class BootStrap {
 
         post.save(flush:true)
 
-        /*
-        PersonRole.withTransaction(){ status ->
-            Role adminRole = Role.findByAuthority("ROLE_ADMIN")
-            if(!user?.id){
-                user = new Person(username:"${grailsApplication.config.root.login}",password:"${grailsApplication.config.root.password}",email:"${grailsApplication.config.root.email}")
-                if(!user.save(flush:true,failOnError:true)){
-                    user.errors.allErrors.each { log.error it }
-                }
-            }else{
-                if(!passwordEncoder.isPasswordValid(user.password, grailsApplication.config.root.password, null)){
-                    log.error "Error: Bootstrapped Root Password was changed in config. Please update"
-                }
-            }
 
-            if(!user?.authorities?.contains(adminRole)){
-                PersonRole pRole = new PersonRole(user,adminRole)
-                pRole.save(flush:true,failOnError:true)
-            }
 
-            status.isCompleted()
-        }
-*/
+
 
 		/*
 		def plugins = pluginMngr.getAllPlugins()

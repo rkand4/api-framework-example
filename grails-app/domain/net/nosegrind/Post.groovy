@@ -15,6 +15,7 @@ class Post implements Serializable{
 	static mapWith = "mongo"
 	static hasMany = [topics:PostTopic]
 
+
 	String title
 	String teaser
 	String content

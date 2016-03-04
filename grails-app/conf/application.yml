@@ -53,13 +53,6 @@ grails:
         defaultScope: singleton
     converters:
         encoding: UTF-8
-    hibernate:
-        cache:
-            use_second_level_cache: true
-            use_query_cache: true
-            provider_class: 'org.hibernate.cache.EhCacheProvider'
-            region:
-                factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
     views:
         default:
             codec: html
@@ -88,6 +81,14 @@ grails:
             -'-XX:MaxGCMinorPauseMillis=50'
             -'-server'
 
+hibernate:
+    cache:
+        use_second_level_cache: true
+        use_query_cache: true
+        provider_class: 'org.hibernate.cache.EhCacheProvider'
+        region:
+            factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+
 environments:
     development:
         server:
@@ -103,7 +104,7 @@ environments:
     development:
         grails:
             mongodb:
-                connectionString: "mongodb://127.0.0.1:27017/testdb"
+                connectionString: 'mongodb://127.0.0.1:27017/testdb'
                 autoConnectRetry: true
                 connectTimeout: 0
                 maxWaitTime: 120000
@@ -172,7 +173,7 @@ apitoolkit:
     corsInterceptor:
         includeEnvironments: {development,test}
         excludeEnvironments: {production}
-        allowedOrigins: "localhost:3000"}
+        allowedOrigins: {"localhost:3000"}
 
 ---
 server:

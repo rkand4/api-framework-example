@@ -4,11 +4,12 @@ import java.io.Serializable;
 import groovy.transform.ToString
 import org.bson.types.ObjectId
 
-//@ToString(includeNames = true, includeFields = true)
+@ToString(includeNames = true, includeFields = true)
 class Section implements Serializable{
 
 	static mapWith = "mongo"
 	static hasMany = [ posts : Post ]
+
 
 	String sectionName
 	Boolean commentsAllowed = true

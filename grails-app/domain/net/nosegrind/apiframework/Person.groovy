@@ -7,6 +7,7 @@ import org.bson.types.ObjectId
 //@ToString(includeNames = true, includeFields = true)
 class Person implements Serializable{
 
+
 	static mapWith = "mongo"
 
 	//private static final long serialVersionUID = 1
@@ -18,7 +19,6 @@ class Person implements Serializable{
 	transient hasBeforeUpdate = false
 	transient springSecurityService
 
-	//ObjectId id
 	String username
 	String password
 	boolean enabled = true
@@ -26,13 +26,14 @@ class Person implements Serializable{
 	boolean accountLocked
 	boolean passwordExpired
 
-	/*
+/*
 	Person(String username, String password) {
 		this()
 		this.username = username
 		this.password = password
 	}
-*/
+	*/
+
 
 	@Override
 	int hashCode() {
@@ -80,6 +81,7 @@ class Person implements Serializable{
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
+
 	/*
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password

@@ -9,6 +9,7 @@ class Status {
 	static mapWith = "mongo"
 	static hasMany = [posts: Post ]
 
+
 	String statName
 	
     static constraints = {
