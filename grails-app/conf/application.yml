@@ -148,7 +148,7 @@ environments:
 apitoolkit:
     apiName: api
     attempts: 5
-    roles: {ROLE_USER,ROLE_ROOT,ROLE_ADMIN,ROLE_ARCH}
+    roles: ['ROLE_USER','ROLE_ROOT','ROLE_ADMIN','ROLE_ARCH']
     apichain:
         limit:3
     rest:
@@ -159,9 +159,9 @@ apitoolkit:
         enabled: true
     encoding: UTF-8
     user:
-        roles: {ROLE_USER}
+        roles: ['ROLE_USER']
     admin:
-        roles: {ROLE_ROOT,ROLE_ADMIN,ROLE_ARCH}
+        roles: ['ROLE_ROOT','ROLE_ADMIN','ROLE_ARCH']
     serverType: master
     webhook:
         services: {iostate}

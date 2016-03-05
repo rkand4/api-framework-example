@@ -18,9 +18,9 @@ class BootStrap {
 	//ApiCacheService apiCacheService
 	
     def init = { servletContext ->
-/*
+
         grailsApplication.config.apitoolkit.roles.each(){
-            String currRole = it.toString()[0..-6]
+            String currRole = it.toString()
             Role role = Role.findByAuthority(currRole)
             if(!role){
                 println(currRole)
@@ -28,7 +28,7 @@ class BootStrap {
                 role.save(flush:true,failOnError:true)
             }
         }
-*/
+
         Person user = Person.findByUsername("${grailsApplication.config.root.login}")
         /*
         PersonRole.withTransaction(){ status ->
