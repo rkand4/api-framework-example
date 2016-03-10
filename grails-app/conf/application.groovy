@@ -10,6 +10,7 @@ String domainEntryPoint = "d${apiVersion}"
 
 
 
+
 // move to RequestMap once stabilized
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugin.springsecurity.rejectIfNoRule = false
@@ -19,7 +20,7 @@ grails.plugin.springsecurity.fii.rejectPublicInvocations = true
 
 /*
 grails.plugin.springsecurity.filterChain.chainMap = [
-        '/**' : 'JOINED_FILTERS,-AbstractSecurityInterceptor,-securityContextPersistenceFilter,-logoutFilter,-authenticationProcessingFilter,-securityContextHolderAwareRequestFilter,-rememberMeAuthenticationFilter,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-FilterSecurityInterceptor'
+        '/${entryPoint}' : 'none'
 ]
 */
 
@@ -63,21 +64,16 @@ grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied
 
 
 grails.plugin.springsecurity.interceptUrlMap = [
-        [pattern:"/${entryPoint}/**",   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/**',                 access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/',                   access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/error',              access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/index',              access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/index.gsp',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/assets/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/error/**',           access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/apidoc/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/**/js/**',           access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/**/css/**',          access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/**/images/**',       access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/**/favicon.ico',     access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/auth',               access:['IS_AUTHENTICATED_ANONYMOUSLY']],
-        [pattern:'/auth/**',            access:['IS_AUTHENTICATED_ANONYMOUSLY']],
+        [pattern:"/${entryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:'/**',                 access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:'/',                   access:['permitAll']],
+        [pattern:'/error',              access:['permitAll']],
+        [pattern:'/index',              access:['permitAll']],
+        [pattern:'/index.gsp',          access:['permitAll']],
+        [pattern:'/assets/**',          access:['permitAll']],
+        [pattern:'/error/**',           access:['permitAll']],
+        [pattern:'/auth',               access:['permitAll']],
+        [pattern:'/auth/**',            access:['permitAll']],
         [pattern:'/login',              access:["permitAll"]],
         [pattern:'/login/**',           access:["permitAll"]],
         [pattern:'/logout',             access:["permitAll"]],

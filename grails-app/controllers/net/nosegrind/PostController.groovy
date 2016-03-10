@@ -69,6 +69,7 @@ class PostController {
 	}
 	
 	def show(){
+		println("POST > SHOW")
 		def post = Post.get(params.id)
 		if(post){
 			return ['post':post]
