@@ -12,14 +12,14 @@ class PostTopicController {
 	def showByPost(){
 		List list = PostTopic.executeQuery("select PT from PostTopic PT where PT.post.id=?",[params.id.toLong()]);
 		if(list){
-			return ['showByPost':list]
+			return ['postTopic':list]
 		}
 	}
 	
 	def showByTopic(){
 		List list = PostTopic.executeQuery("select PT from PostTopic PT where PT.topic.id=?",[params.id.toLong()]);
 		if(list){
-			return ['showByTopic':list]
+			return ['postTopic':list]
 		}
 	}
 
@@ -48,8 +48,8 @@ class PostTopicController {
 			}
 		}
 		List list = PostTopic.executeQuery("select T from Topic T left join T.posts P where P.post.id=?",[params.id.toLong()]);
-		LinkedHashMap model = [:]
-		render model as Object, [model:[list:list]]
+
+		return ['postTopic':list]
 	}
 
 	def delPostTopic(){
@@ -71,7 +71,7 @@ class PostTopicController {
 			}
 		}
 		List list = PostTopic.executeQuery( "select T from Topic T left join T.posts P where P.post.id=?",[params.id.toLong()]);
-		LinkedHashMap model = [:]
-		render model as Object, [model:[list:list]]
+
+		return ['postTopic':list]
 	}
 }

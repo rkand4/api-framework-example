@@ -32,7 +32,8 @@ class TopicController {
 			}
 			//render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save topic')
 		}else{
-			respond Topic.get(topicInstance.id)
+			def topic = Topic.get(topicInstance.id)
+			return ['topic':topic]
 		}
 		return null
 	}
@@ -51,7 +52,8 @@ class TopicController {
 		}
 		
 		topicInstance.save()
-		respond Topic.get(topicInstance.id)
+		def topic = Topic.get(topicInstance.id)
+		return ['topic':topic]
 	}
 	
 	def delete(){

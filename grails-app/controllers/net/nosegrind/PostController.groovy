@@ -27,7 +27,8 @@ class PostController {
 				rowCount()
 			}
 		}
-		return ['posts':post, 'total':rowCount]
+		def post2 = ['posts':post, 'total':rowCount]
+		return ['post':post2]
 	}
 	
 	def listByTopic(){
@@ -65,11 +66,11 @@ class PostController {
 			eq("section", section)
 			projections {rowCount()}
 		}
-		return ['section':section, 'posts':post, 'params':params, 'total':rowCount]
+		def post2 = ['section':section, 'posts':post, 'params':params, 'total':rowCount]
+		return ['post':post2]
 	}
 	
 	def show(){
-		println("POST > SHOW")
 		def post = Post.get(params.id)
 		if(post){
 			return ['post':post]
@@ -157,7 +158,8 @@ class PostController {
 		}
 		
 		if(!postInstance.delete(flush:true)){
-			return ['id':params.id]
+			def post = ['id':params.id]
+			return ['post':post]
 		}
 	}
 }

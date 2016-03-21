@@ -11,13 +11,14 @@ class SectionController {
 	static defaultAction = 'list'
 
 	def list(){
-		respond Section.list()
+		def list = Section.list()
+		return ['section':list]
 	}
 	
 	def show(){
 		def section = Section.get(params.id.toLong())
 		if(section){
-			respond section
+			return ['section':section]
 		}
 		return null
 	}
@@ -59,10 +60,11 @@ class SectionController {
 		}
 
 		if(!sectionInstance.save(flush:true)){
-			respond null
+			return false
 		}else{
 			//apiToolkitService.callHook('test',testInstance,'update')
-			respond Section.get(sectionInstance.id.toLong())
+			def section =  Section.get(sectionInstance.id.toLong())
+			return ['section':section]
 		}
 
 		return null

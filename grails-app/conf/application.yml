@@ -102,6 +102,11 @@ environments:
 ---
 environments:
     development:
+        iostate:
+            preloadDir: '/home/owenrubel/.iostate'
+            archInstanceUrls:
+                proxy: "127.0.0.1"
+                mq: "127.0.0.1"
         grails:
             mongodb:
                 connectionString: 'mongodb://127.0.0.1:27017/testdb'
@@ -116,6 +121,11 @@ environments:
         dataSource:
             dbCreate: create-drop
     test:
+        iostate:
+            preloadDir: '/home/owenrubel/.iostate'
+            archInstanceUrls:
+                proxy: "127.0.0.1"
+                mq: "127.0.0.1"
         grails:
             mongodb:
                 connectionString: "mongodb://127.0.0.1:27017/testdb"
@@ -130,6 +140,11 @@ environments:
         dataSource:
             dbCreate: create-drop
     production:
+        iostate:
+            preloadDir: '/home/owenrubel/.iostate'
+            archInstanceUrls:
+                proxy: "127.0.0.1"
+                mq: "127.0.0.1"
         grails:
             mongodb:
                 connectionString: "mongodb://127.0.0.1:27017/testdb"
@@ -165,11 +180,6 @@ apitoolkit:
     serverType: master
     webhook:
         services: ['iostate']
-    iostate:
-        preloadDir: '/home/owenrubel/.iostate'
-        archInstanceUrls:
-            proxy: '127.0.0.1'
-            mq: '127.0.0.1'
     corsInterceptor:
         includeEnvironments: ['development','test']
         excludeEnvironments: ['production']
