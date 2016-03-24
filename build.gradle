@@ -5,7 +5,6 @@ buildscript {
         //grailsVersion = project.grailsVersion
     }
     repositories {
-        mavenCentral()
         mavenLocal()
         mavenCentral()
         maven { url "https://repo.grails.org/grails/core" }
