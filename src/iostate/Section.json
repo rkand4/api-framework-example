@@ -1,0 +1,103 @@
+/* JSON API Object */
+/* ****************************************************************************
+ * Copyright 2014 Owen Rubel
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed is distributed on an "AS IS" BASIS,WITHOUT WARRANTIES 
+ * OR CONDITIONS OF ANY KIND, either express or implied.
+ *****************************************************************************/
+// NOTES
+
+/* 'permitAll' needs to always come first so other roles can make use of it
+* as they come afterward
+*/
+
+{
+	"NAME":"section",
+    "VALUES": {
+        "id": {
+            "type": "PKEY",
+            "description":"ID for Section"
+        },
+        "version": {
+            "type": "Long",
+            "description":"Version for Updating Section"
+        },
+        "sectionName": {
+            "type": "String",
+            "description":"Name of Section"
+        }
+    },
+	"CURRENTSTABLE": "1",
+	"VERSION": {
+		"1": {
+	        "DOMAINPACKAGE":"",
+			"DEFAULTACTION":"list",
+	        "URI": {
+	        	"list": {
+	             	"METHOD":"GET",
+	            	"DESCRIPTION":"List Sections",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                	"permitAll":[]
+	                },
+	                "RESPONSE": {
+	                	"permitAll":["id","sectionName","version"]
+	                }
+	        	},
+	            "show": {
+	             	"METHOD":"GET",
+	            	"DESCRIPTION":"Show Section",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id"]
+	                },
+	                "RESPONSE": {
+	                	"permitAll":["id","sectionName","version"]
+	                }
+	            },
+	            "create": {
+	            	"METHOD":"POST",
+	            	"DESCRIPTION":"Create Section",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["sectionName"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id","version"]
+	                },
+	                "ERROR":["304_NOT_MODIFIED"]
+	            },
+	            "update": {
+	            	"METHOD":"PUT",
+	            	"DESCRIPTION":"Update Section",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id","sectionName"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id","version"]
+	                },
+	                "ERROR":["304_NOT_MODIFIED"]
+	            },
+	            "delete": {
+	            	"METHOD":"DELETE",
+	            	"DESCRIPTION":"Delete Topic",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id"]
+	                },
+	                "ERROR":["304_NOT_MODIFIED"]
+	            }
+	        }
+		}
+	}
+}
