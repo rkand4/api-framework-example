@@ -1,7 +1,18 @@
 package net.nosegrind.apiframework
 
-/**
- * Created by owenrubel on 6/13/16.
- */
-class AuthenticationToken {
+import groovy.transform.ToString
+
+@ToString(includeNames = true, includeFields = true)
+class AuthenticationToken implements Serializable{
+
+    static mapWith = "mongo"
+
+    String tokenValue
+    String username
+
+    static mapping = {
+        cache true
+        version false
+    }
+
 }

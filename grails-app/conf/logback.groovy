@@ -11,6 +11,7 @@ appender('STDOUT', ConsoleAppender) {
 
 root(ERROR, ['STDOUT'])
 
+
 if(Environment.current == Environment.DEVELOPMENT) {
     def targetDir = BuildSettings.TARGET_DIR
     if(targetDir) {
@@ -24,6 +25,9 @@ if(Environment.current == Environment.DEVELOPMENT) {
             }
         }
         logger("StackTrace", ERROR, ['FULL_STACKTRACE'], false )
+        //logger 'net.nosegrind.apiframework', TRACE, ['STDOUT', 'FULL_STACKTRACE']
+        //logger 'org.springframework.security.web.FilterChainProxy', TRACE,['STDOUT', 'FULL_STACKTRACE']
+        //logger 'grails.plugin.springsecurity', TRACE, ['STDOUT', 'FULL_STACKTRACE']
     }
 }
 

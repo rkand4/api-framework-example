@@ -1,6 +1,7 @@
 package net.nosegrind.apiframework
 
 
+
 class ErrorController {
 
     def index() {

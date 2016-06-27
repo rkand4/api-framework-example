@@ -23,18 +23,20 @@ class BootStrap {
             String currRole = it.toString()
             Role role = Role.findByAuthority(currRole)
             if(!role){
-                println(currRole)
+                //println(currRole)
                 role = new Role(authority:currRole)
                 role.save(flush:true,failOnError:true)
             }
         }
 
         Person user = Person.findByUsername("${grailsApplication.config.root.login}")
-        /*
+//Person user = Person.findByUsername("root")
+
         PersonRole.withTransaction(){ status ->
             Role adminRole = Role.findByAuthority("ROLE_ADMIN")
             if(!user?.id){
                 user = new Person(username:"${grailsApplication.config.root.login}",password:"${grailsApplication.config.root.password}",email:"${grailsApplication.config.root.email}")
+                //user = new Person(username:"root",password:"password",email:"orubel@nosegrind.net")
                 if(!user.save(flush:true,failOnError:true)){
                     user.errors.allErrors.each { log.error it }
                 }
@@ -51,7 +53,7 @@ class BootStrap {
 
             status.isCompleted()
         }
-
+/*
         new Section(sectionName:"News").save(flush:true,failOnError:true)
         new Section(sectionName:"General").save(flush:true,failOnError:true)
         new Section(sectionName:"Update").save(flush:true,failOnError:true)
@@ -61,7 +63,7 @@ class BootStrap {
         new Topic(topicName:"Spring").save(flush:true,failOnError:true)
         new Topic(topicName:"Grails").save(flush:true,failOnError:true)
         new Topic(topicName:"Groovy").save(flush:true,failOnError:true)
-*/
+
 
         Post post = new Post();
 
@@ -81,7 +83,7 @@ class BootStrap {
 
 
 
-
+*/
 
 		/*
 		def plugins = pluginMngr.getAllPlugins()

@@ -58,10 +58,14 @@ test {
 }
 
 dependencies {
-    compile 'org.grails.plugins:api-framework:0.2.1.1'
+    compile 'org.grails.plugins:api-framework:0.2.1.2'
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
-    compile "org.grails:grails-dependencies"
+    compile('org.grails:grails-dependencies'){
+        //exclude(module:'grails-plugin-rest')
+        //exclude(module:'grails-bootstrap')
+        //exclude(module:'grails-plugin-gsp')
+    }
 
 
     //Stormpath user mgmt
@@ -80,6 +84,8 @@ dependencies {
 
     provided 'org.springframework.boot:spring-boot-starter-tomcat'
     compile 'org.grails.plugins:spring-security-core:3.0.3'
+    compile "org.grails.plugins:spring-security-rest:2.0.0.M2"
+    compile 'org.grails.plugins:spring-security-rest-gorm:2.0.0.M2'
 
     compile "org.grails.plugins:hibernate"
     compile "org.hibernate:hibernate-ehcache"

@@ -1,7 +1,26 @@
 package net.nosegrind.apiframework
 
-/**
- * Created by owenrubel on 6/14/16.
- */
+
 class PersistentLogin {
+
+    String id
+    String username
+    String token
+    Date lastUsed
+
+    static constraints = {
+        username maxSize: 64
+        token maxSize: 64
+        id maxSize: 64
+    }
+
+    static transients = ['series']
+
+    void setSeries(String series) { id = series }
+    String getSeries() { id }
+
+    static mapping = {
+        id column: 'series', generator: 'assigned'
+        version false
+    }
 }
