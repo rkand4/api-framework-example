@@ -3,32 +3,16 @@ import grails.util.Metadata
 String apiVersion = Metadata.current.getApplicationVersion()
 // fix for dots not working with spring security pathing
 String entryPoint = "/v${apiVersion}".toString()
-String batchEntryPoint = "b${apiVersion}"
-String chainEntryPoint = "c${apiVersion}"
-String metricsEntryPoint = "m${apiVersion}"
-String domainEntryPoint = "d${apiVersion}"
-
-
+String batchEntryPoint = "/b${apiVersion}".toString()
+String chainEntryPoint = "/c${apiVersion}".toString()
+String metricsEntryPoint = "/t${apiVersion}".toString()
+String domainEntryPoint = "/d${apiVersion}".toString()
 
 
 // move to RequestMap once stabilized
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugin.springsecurity.rejectIfNoRule = false
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-
-//'JOINED_FILTERS,-securityContextPersistenceFilter,-logoutFilter,-authenticationProcessingFilter,-securityContextHolderAwareRequestFilter,-rememberMeAuthenticationFilter,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-FilterSecurityInterceptor'
-
-/*
-grails.plugin.springsecurity.filterChain.chainMap = [
-        '/${entryPoint}' : 'none'
-]
-*/
-
-/*        "/${batchEntryPoint}/**" : 'none',
-        "/${chainEntryPoint}/**" : 'none',
-        "/${metricsEntryPoint}/**" : 'none',
-        "/${domainEntryPoint}/**" : 'none'
-*/
 
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'net.nosegrind.apiframework.Person'
@@ -64,18 +48,33 @@ grails.plugin.springsecurity.filterChain.chainMap = [
         //Stateless chain
         [
                 pattern: '/api/**',
-                filters: 'JOINED_FILTERS,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter'
+                filters: 'JOINED_FILTERS,-restTokenValidationFilter,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-securityContextPersistenceFilter'
         ],
+	// multitenant chains
+	[
+        	pattern: "${entryPoint}/**", 
+		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
+	],
+	[
+        	pattern: "${batchEntryPoint}/**", 
+		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
+	],
+	[
+        	pattern: "${chainEntryPoint}/**", 
+		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
+	],
+	[
+        	pattern: "${metricsEntryPoint}/**", 
+		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
+	],
+	[
+        	pattern: "${domainEntryPoint}/**", 
+		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
+	]
 
-        //Traditional chain
-        [
-                pattern: '/**',
-                filters: 'JOINED_FILTERS,-restExceptionTranslationFilter'
-        ]
 ]
 
-//        [pattern:"/${entryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
-//[pattern:'/**',                 access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+
 grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/api/**',            access:['permitAll']],
 
@@ -102,7 +101,6 @@ grails.plugin.springsecurity.rest.login.failureStatusCode = '401'
 grails.plugin.springsecurity.rest.login.useJsonCredentials  = true
 grails.plugin.springsecurity.rest.login.usernamePropertyName =  'username'
 grails.plugin.springsecurity.rest.login.passwordPropertyName =  'password'
-
 
 
 

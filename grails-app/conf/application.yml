@@ -112,7 +112,7 @@ environments:
                 connectionString: 'mongodb://127.0.0.1:27017/testdb'
                 autoConnectRetry: true
                 connectTimeout: 0
-                maxWaitTime: 120000
+                maxWaitTime: 12000
                 socketTimeout: 0
                 socketKeepAlive: false
                 writeNumer: 0
@@ -131,7 +131,7 @@ environments:
                 connectionString: "mongodb://127.0.0.1:27017/testdb"
                 autoConnectRetry: true
                 connectTimeout: 0
-                maxWaitTime: 120000
+                maxWaitTime: 12000
                 socketTimeout: 0
                 socketKeepAlive: false
                 writeNumer: 0
@@ -141,7 +141,7 @@ environments:
             dbCreate: create-drop
     production:
         iostate:
-            preloadDir: '/home/owenrubel/.iostate'
+            preloadDir: '/home/ubuntu/.iostate'
             archInstanceUrls:
                 proxy: "127.0.0.1"
                 mq: "127.0.0.1"
@@ -150,7 +150,7 @@ environments:
                 connectionString: "mongodb://127.0.0.1:27017/testdb"
                 autoConnectRetry: true
                 connectTimeout: 0
-                maxWaitTime: 120000
+                maxWaitTime: 12000
                 socketTimeout: 0
                 socketKeepAlive: false
                 writeNumer: 0

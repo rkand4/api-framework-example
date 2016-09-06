@@ -63,8 +63,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile('org.grails:grails-dependencies'){
         //exclude(module:'grails-plugin-rest')
-        //exclude(module:'grails-bootstrap')
-        //exclude(module:'grails-plugin-gsp')
+        exclude(module:'grails-bootstrap')
+        exclude(module:'grails-plugin-gsp')
     }
 
 
@@ -92,9 +92,9 @@ dependencies {
 
     //runtime "org.grails.plugins:scaffolding"
 
-    testCompile "org.grails.plugins:geb"
+    //testCompile "org.grails.plugins:geb"
     //testCompile "org.grails:grails-datastore-rest-client:4.0.4.RELEASE"
-    testCompile "org.grails:grails-plugin-testing"
+    //testCompile "org.grails:grails-plugin-testing"
     //console "org.grails:grails-console"
 }
 
