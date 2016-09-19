@@ -19,8 +19,7 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'net.nosegrind.api
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'net.nosegrind.apiframework.PersonRole'
 grails.plugin.springsecurity.authority.className = 'net.nosegrind.apiframework.Role'
 
-
-// grails.plugin.springsecurity.rememberMe.persistent = true		  // grails.plugin.springsecurity.rememberMe.persistent = true
+// grails.plugin.springsecurity.rememberMe.persistent = true		  
 // grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apiframework.PersistentLogin'		  // grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apiframework.PersistentLogin'
 
 
@@ -45,40 +44,26 @@ grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied
 
 
 grails.plugin.springsecurity.filterChain.chainMap = [
-        //Stateless chain
         [
                 pattern: '/api/**',
-                filters: 'JOINED_FILTERS,-restTokenValidationFilter,-anonymousAuthenticationFilter,-exceptionTranslationFilter,-securityContextPersistenceFilter'
+                filters: 'restAuthenticationFilter'
         ],
 	// multitenant chains
-	[
-        	pattern: "${entryPoint}/**", 
-		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
-	],
-	[
-        	pattern: "${batchEntryPoint}/**", 
-		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
-	],
-	[
-        	pattern: "${chainEntryPoint}/**", 
-		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
-	],
-	[
-        	pattern: "${metricsEntryPoint}/**", 
-		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
-	],
-	[
-        	pattern: "${domainEntryPoint}/**", 
-		filters:'JOINED_FILTERS, -securityContextPersistenceFilter,-exceptionTranslationFilter,-mutableLogoutFilter, -logoutFilter, -grailsUsernamePasswordAuthenticationFilte, -grailsRememberMeAuthenticationFilter, -restAuthenticationFilter, -filterSecurityInterceptor'
-	]
-
+	[pattern: "${entryPoint}/**",filters:'restTokenValidationFilter'],
+	[pattern: "${batchEntryPoint}/**", filters:'restTokenValidationFilter'],
+	[pattern: "${chainEntryPoint}/**", filters:'restTokenValidationFilter'],
+	[pattern: "${metricsEntryPoint}/**", filters:'restTokenValidationFilter'],
+	[pattern: "${domainEntryPoint}/**", filters:'restTokenValidationFilter']
 ]
 
 
 grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/api/**',            access:['permitAll']],
-
         [pattern:"/${entryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:"/${batchEntryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:"/${chainEntryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:"/${metricsEntryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
+        [pattern:"/${domainEntryPoint}/**",   access:["permitAll && \"{'GET','PUT','POST','DELETE','OPTIONS'}\".contains(request.getMethod())"]],
         [pattern:'/',                   access:['permitAll']],
         [pattern:'/error',              access:['permitAll']],
         [pattern:'/error/**',           access:['permitAll']],
@@ -90,7 +75,11 @@ grails.plugin.springsecurity.interceptUrlMap = [
         [pattern:'/login',              access:["permitAll"]],
         [pattern:'/login/**',           access:["permitAll"]],
         [pattern:'/logout',             access:["permitAll"]],
-        [pattern:'/logout/**',          access:["permitAll"]]
+        [pattern:'/logout/**',          access:["permitAll"]],
+    [pattern: '/**', access: ['denyAll'], httpMethod: 'GET'],
+    [pattern: '/**', access: ['denyAll'], httpMethod: 'POST'],
+    [pattern: '/**', access: ['denyAll'], httpMethod: 'PUT'],
+    [pattern: '/**', access: ['denyAll'], httpMethod: 'DELETE']
 ]
 
 grails.plugin.springsecurity.rest.login.active  = true
@@ -102,7 +91,7 @@ grails.plugin.springsecurity.rest.login.useJsonCredentials  = true
 grails.plugin.springsecurity.rest.login.usernamePropertyName =  'username'
 grails.plugin.springsecurity.rest.login.passwordPropertyName =  'password'
 
-
+server.useForwardHeaders = false
 
 
 grails.plugin.springsecurity.rest.token.generation.useSecureRandom  = true
