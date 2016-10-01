@@ -16,4 +16,8 @@ class Topic implements Serializable{
     static constraints = {
 		topicName(size:2..65, nullable:false, blank:false,unique:true)
     }
+
+	static mapping = {
+		cache true
+	}
 }

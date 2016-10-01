@@ -1,5 +1,6 @@
 import grails.util.Metadata
 
+
 String apiVersion = Metadata.current.getApplicationVersion()
 // fix for dots not working with spring security pathing
 String entryPoint = "/v${apiVersion}".toString()
@@ -43,13 +44,14 @@ grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/ajaxDeni
 grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied'
 
 
+
 grails.plugin.springsecurity.filterChain.chainMap = [
         [
                 pattern: '/api/**',
                 filters: 'restAuthenticationFilter'
         ],
 	// multitenant chains
-	[pattern: "${entryPoint}/**",filters:'restTokenValidationFilter'],
+	[pattern: "${entryPoint}/**",filters:'tokenCacheValidationFilter'],
 	[pattern: "${batchEntryPoint}/**", filters:'restTokenValidationFilter'],
 	[pattern: "${chainEntryPoint}/**", filters:'restTokenValidationFilter'],
 	[pattern: "${metricsEntryPoint}/**", filters:'restTokenValidationFilter'],
