@@ -80,7 +80,13 @@ grails:
             -'-XX:MaxGCPauseMillis=50'
             -'-XX:MaxGCMinorPauseMillis=50'
             -'-server'
-
+dataSource:
+    pooled: true
+    driverClassName: "org.h2.Driver"
+    username: sa
+    password:
+    dbCreate: update
+    url: jdbc:h2:mem:testDb;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
 hibernate:
     cache:
         use_second_level_cache: true
@@ -88,6 +94,7 @@ hibernate:
         provider_class: 'org.hibernate.cache.EhCacheProvider'
         region:
             factory_class: 'org.hibernate.cache.ehcache.EhCacheRegionFactory'
+
 
 environments:
     development:
@@ -141,7 +148,7 @@ environments:
             dbCreate: create-drop
     production:
         iostate:
-            preloadDir: '/home/ubuntu/.iostate'
+            preloadDir: '/home/owenrubel/.iostate'
             archInstanceUrls:
                 proxy: "127.0.0.1"
                 mq: "127.0.0.1"

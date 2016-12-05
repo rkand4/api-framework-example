@@ -2,7 +2,6 @@
 buildscript {
     ext {
         grailsVersion = '3.1.1'
-        //grailsVersion = project.grailsVersion
     }
     repositories {
         mavenLocal()
@@ -11,7 +10,10 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath 'org.grails.plugins:api-framework:0.2.1.2'
         classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.1.1'
+
+        //classpath 'org.grails.plugins:db-reverse-engineer:4.0.0'
     }
 }
 
@@ -27,7 +29,7 @@ apply plugin: "spring-boot"
 //apply plugin: 'eclipse'
 //apply plugin: 'idea'
 apply plugin: "org.grails.grails-web"
-apply plugin: "org.grails.grails-gsp"
+//apply plugin: "org.grails.grails-gsp"
 
 
 ext {
@@ -67,6 +69,7 @@ dependencies {
         exclude(module:'grails-plugin-gsp')
     }
 
+    //compile 'org.grails.plugins:db-reverse-engineer:4.0.0'
 
     //Stormpath user mgmt
     //compile 'com.stormpath.sdk:stormpath-servlet-application:1.0.RC4.3'
@@ -85,22 +88,21 @@ dependencies {
     provided 'org.springframework.boot:spring-boot-starter-tomcat'
     //compile 'org.grails.plugins:spring-security-core:3.0.3'
     provided('org.grails.plugins:spring-security-rest:2.0.0.M2'){
-	exclude(module:'org.springframework.security:spring-security-web')
-	exclude(module:'org.pac4j:pac4j-cas')
-	exclude(module:'com.fasterxml.jackson.core:jackson-databind')
+	    exclude(module:'org.springframework.security:spring-security-web')
+	    exclude(module:'org.pac4j:pac4j-cas')
+	    exclude(module:'com.fasterxml.jackson.core:jackson-databind')
     }
     compile 'org.grails.plugins:spring-security-rest-gorm:2.0.0.M2'
 
-
-    compile "org.grails.plugins:hibernate"
-    compile "org.hibernate:hibernate-ehcache"
+    provided 'org.grails.plugins:hibernate:4.3.10.6'
+    provided "org.hibernate:hibernate-ehcache"
 
     //runtime "org.grails.plugins:scaffolding"
 
     //testCompile "org.grails.plugins:geb"
     //testCompile "org.grails:grails-datastore-rest-client:4.0.4.RELEASE"
     //testCompile "org.grails:grails-plugin-testing"
-    //console "org.grails:grails-console"
+    console "org.grails:grails-console"
 }
 
 task wrapper(type: Wrapper) {

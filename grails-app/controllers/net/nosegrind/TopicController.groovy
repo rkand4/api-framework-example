@@ -17,7 +17,6 @@ class TopicController {
 	}
 	
 	def show(){
-
 		def topic = Topic.get(params.id.toLong())
 		if(topic){
 	    		return ['topic':topic]

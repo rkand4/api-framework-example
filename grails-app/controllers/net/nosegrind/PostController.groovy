@@ -5,14 +5,14 @@ import net.nosegrind.apiframework.Person
 import static grails.async.Promises.*
 import javax.servlet.http.HttpServletResponse
 //import grails.transaction.Transactional
-import net.nosegrind.apiframework.TraceService
+//import net.nosegrind.apiframework.TraceService
 
 //@Transactional
 class PostController {
                              
 	static defaultAction = 'list'
 	def springSecurityService
-	TraceService traceService
+	//TraceService traceService
 	
 	def list(){
 		params.max = (params.max) ? params.max?.toInteger() : 10
@@ -80,7 +80,7 @@ class PostController {
 			return ['post':post]
 		}else{
 			render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Bad ID. ID does not correspond with record.')
-			traceService.endTrace('PostController','show')
+			//traceService.endTrace('PostController','show')
 		}
 	}
 

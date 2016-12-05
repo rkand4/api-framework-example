@@ -40,5 +40,6 @@ class Post implements Serializable{
 	static mapping = {
 		cache true
 	}
+
 }
 

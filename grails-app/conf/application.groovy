@@ -10,6 +10,7 @@ String metricsEntryPoint = "/t${apiVersion}".toString()
 String domainEntryPoint = "/d${apiVersion}".toString()
 
 
+
 // move to RequestMap once stabilized
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugin.springsecurity.rejectIfNoRule = false
@@ -43,19 +44,18 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/ajaxSucce
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/ajaxDenied'
 grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/login/ajaxDenied'
 
-
+// DBREVERSEENGINEER
+//grails.plugin.reveng.packageName = "io.beapi"
+//grails.plugin.reveng.manyToManyBelongsTos = 'none'
 
 grails.plugin.springsecurity.filterChain.chainMap = [
-        [
-                pattern: '/api/**',
-                filters: 'restAuthenticationFilter'
-        ],
-	// multitenant chains
-	[pattern: "${entryPoint}/**",filters:'tokenCacheValidationFilter'],
-	[pattern: "${batchEntryPoint}/**", filters:'restTokenValidationFilter'],
-	[pattern: "${chainEntryPoint}/**", filters:'restTokenValidationFilter'],
-	[pattern: "${metricsEntryPoint}/**", filters:'restTokenValidationFilter'],
-	[pattern: "${domainEntryPoint}/**", filters:'restTokenValidationFilter']
+		[pattern: '/api/**', filters: 'restAuthenticationFilter'],
+		// multitenant chains
+		[pattern: "${entryPoint}/**",filters:'tokenCacheValidationFilter'],
+		[pattern: "${batchEntryPoint}/**", filters:'tokenCacheValidationFilter'],
+		[pattern: "${chainEntryPoint}/**", filters:'tokenCacheValidationFilter'],
+		[pattern: "${metricsEntryPoint}/**", filters:'tokenCacheValidationFilter'],
+		[pattern: "${domainEntryPoint}/**", filters:'tokenCacheValidationFilter']
 ]
 
 
@@ -120,5 +120,3 @@ grails.plugin.springsecurity.rememberMe.persistent = false
 grails.plugin.springsecurity.logout.postOnly = false
 
 grails.plugin.springsecurity.useSecurityEventListener = false
-
-

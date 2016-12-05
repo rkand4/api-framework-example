@@ -1,7 +1,7 @@
 package net.nosegrind.apiframework
 
 import org.grails.core.DefaultGrailsControllerClass
-import net.nosegrind.apiframework.Method
+//import net.nosegrind.apiframework.Method
 import grails.util.Metadata
 
 class ApidocController {
